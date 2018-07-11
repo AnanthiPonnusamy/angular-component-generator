@@ -1,0 +1,6 @@
+<div id="<%=component%>">
+    <%=generatedTemplate%>
+    <div>
+        <button (click)="submit()"><%=trigger%></button>
+    </div>
+</div>

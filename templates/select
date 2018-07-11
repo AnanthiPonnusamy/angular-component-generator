@@ -1,0 +1,6 @@
+<div id="<%=id%>" class="<%=classes%>">
+    <label><%=label%>:&nbsp</label>
+    <select [(ngModel)]="<%=model%>">
+        <option *ngFor="let data of <%=options%>">{{ data }}</option>
+    </select>
+</div>

@@ -1,0 +1,24 @@
+{
+  "name": "form-generator",
+  "version": "1.0.0",
+  "description": "To generate angular component which is a form based on the input meta json",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sabbuuday/form-generator.git"
+  },
+  "author": "sabbu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sabbuuday/form-generator/issues"
+  },
+  "homepage": "https://github.com/sabbuuday/form-generator#readme",
+  "dependencies": {
+    "fformat": "^1.1.1",
+    "rimraf": "^2.6.2",
+    "underscore": "^1.9.1"
+  }
+}
