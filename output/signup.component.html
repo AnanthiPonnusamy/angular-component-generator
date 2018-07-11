@@ -1,0 +1,27 @@
+<div id="Signup">
+    <div id="userId" class="">
+        <label>User Id:&nbsp</label>
+        <input class="form-control" type="text" [(ngModel)]="userId">
+    </div>
+    <div id="companyId" class="">
+        <label>Company Id:&nbsp</label>
+        <input class="form-control" type="text" [(ngModel)]="companyId">
+    </div>
+    <div id="password" class="">
+        <label>password:&nbsp</label>
+        <input class="form-control" type="password" [(ngModel)]="password">
+    </div>
+    <div id="stationType" class="col-md-2">
+        <label>Station Type:&nbsp</label>
+        <select [(ngModel)]="stationType">
+        <option *ngFor="let data of ">{{ data }}</option>
+    </select>
+    </div>
+    <div id="capId" class="">
+        <label>Captcha:&nbsp</label>
+        <input class="form-control" type="text" [(ngModel)]="capId">
+    </div>
+    <div>
+        <button (click)="submit()">Submit</button>
+    </div>
+</div>
