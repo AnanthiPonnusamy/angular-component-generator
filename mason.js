@@ -51,11 +51,12 @@ _this.buildTemplate = (templates, input) => {
 };
 
 _this.buildController = (template, input) => {
+    var payload = JSON.stringify(input.service.payload).replace(/"/g, '');
     return _.template(template)({
         component: input.component,
         fileName: input.component.toLowerCase(),
         models: _.keys(input.form),
-        payload: JSON.stringify(input.service.payload)
+        payload: payload
     });
 };
 
