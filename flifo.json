@@ -1,0 +1,31 @@
+{
+  "component": "Signup",
+  "form": {
+    "flightCode": {
+      "inputType": "text",
+      "label": "Flight Code",
+      "class": ""
+    },
+    "flightNumber": {
+      "inputType": "text",
+      "label": "Flight Number",
+      "class": ""
+    },
+    "operationDate": {
+      "inputType": "text",
+      "label": "Date",
+      "class": ""
+    }
+  },
+  "trigger": {
+    "value": "Submit"
+  },
+  "service": {
+    "url": "https://qu4srb4d7g.execute-api.eu-west-2.amazonaws.com/QA/getFlightDetails",
+    "payload":{
+      "operationDate":"this.operationDate",
+      "flightCode":"this.flightCode",
+      "flightNumber":"this.flightNumber"
+    }
+  }
+}

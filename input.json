@@ -34,13 +34,13 @@
     "url": "https://desktop-dev.worldtracer.aero/1.2.0.17/wtrui-web/v6.0/Proxy/login/loginAuth",
     "payload": {
       "user": {
-        "userId": "GUEST",
-        "companyId": "U2",
-        "password": "Guest@123",
-        "stationType": "A"
+        "userId": "this.userId",
+        "companyId": "this.companyId",
+        "password": "this.password",
+        "stationType": "this.stationType"
       },
       "captcha": {
-        "capId": "No_Captcha"
+        "capId": "this.capId"
       }
     }
   }
