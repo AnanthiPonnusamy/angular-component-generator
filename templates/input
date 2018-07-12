@@ -1,4 +1,4 @@
 <div id="<%=id%>" class="<%=classes%>">
-    <label><%=label%>:&nbsp</label>
+    <label><%=label%>:&nbsp;</label>
     <input class="form-control" type="<%=type%>" [(ngModel)]="<%=model%>">
 </div>

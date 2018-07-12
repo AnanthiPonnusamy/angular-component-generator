@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { <%=component%>Service } from './<%=fileName%>.service';
 
-@Component({  
-    selector: 'app-<%=fileName%>',  
-    templateUrl: './<%=fileName%>.component.html',  
-    styleUrls: ['./<%=fileName%>.component.scss'],  
+@Component({
+    selector: 'app-<%=fileName%>',
+    templateUrl: './<%=fileName%>.component.html',
+    styleUrls: ['./<%=fileName%>.component.scss'],
     providers: [<%=component%>Service]
 })
 
 export class <%=component%>Component implements OnInit {
     <% _.each(models, function (model) { %>
-    <%= model %>;<% }); %>      
-    
-    constructor(private service: <%=component%>Service) { };
-    
-    ngOnInit() { };
-    
+    <%= model %>;<% }); %>
+
+    constructor(private service: <%=component%>Service) { }
+
+    ngOnInit() { }
+
     submit() {
         const payload = <%=payload%>;
         this.service.submit(payload).subscribe(response => {
-            console.log(values);
+            console.log(response);
         }, err => {
-            console.log(error);
-        });  
-    };
+            console.log(err);
+        });
+    }
 }
