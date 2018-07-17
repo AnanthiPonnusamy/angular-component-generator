@@ -1,32 +1,5 @@
 {
   "component": "Signup",
-  "form": {
-    "userId": {
-      "inputType": "text",
-      "label": "User Id",
-      "class": ""
-    },
-    "companyId": {
-      "inputType": "text",
-      "label": "Company Id",
-      "class": ""
-    },
-    "password": {
-      "inputType": "password",
-      "label": "password",
-      "class": ""
-    },
-    "stationType": {
-      "inputType": "select",
-      "label": "Station Type",
-      "classes": "col-md-2"
-    },
-    "capId": {
-      "inputType": "text",
-      "label": "Captcha",
-      "class": ""
-    }
-  },
   "trigger": {
     "value": "Submit"
   },
@@ -34,13 +7,13 @@
     "url": "https://desktop-dev.worldtracer.aero/1.2.0.17/wtrui-web/v6.0/Proxy/login/loginAuth",
     "payload": {
       "user": {
-        "userId": "this.userId",
-        "companyId": "this.companyId",
-        "password": "this.password",
-        "stationType": "this.stationType"
+        "userId": "",
+        "companyId": "",
+        "password": "",
+        "stationType": ""
       },
       "captcha": {
-        "capId": "this.capId"
+        "capId": ""
       }
     }
   }

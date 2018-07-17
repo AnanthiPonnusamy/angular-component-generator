@@ -4,43 +4,44 @@
 const _ = require('underscore');
 
 const _this = this;
+_this.elements = [];
 
-_this.buildInput = (template, fieldId, field) => {
+_this.buildInput = (template, field) => {
     return _.template(template)({
-        id: fieldId,
-        label: field.label,
-        type: field.inputType,
-        model: fieldId,
-        classes: field.classes
+        id: field,
+        label: field,
+        type: 'text',
+        model: field,
     });
 };
 
-_this.buildSelect = (template, fieldId, field) => {
+_this.buildSelect = (template, field) => {
     return _.template(template)({
-        id: fieldId,
-        label: field.label,
-        model: fieldId,
-        classes: field.classes,
-        options: field.options
+        id: field,
+        label: field,
+        model: field
     });
 };
 
 _this.buildTemplate = (templates, input) => {
     var generatedTemplate = '';
+    console.log('ele template: ', _this.elements);
 
-    _.each(input.form, (field, fieldId) => {
-        switch (field.inputType) {
-            case 'text':
-            case 'password':
-            case 'number':
-                generatedTemplate += _this.buildInput(templates.input, fieldId, field);
-                break;
-            case 'select':
-                generatedTemplate += _this.buildSelect(templates.select, fieldId, field);
-                break;
-            default:
-                console.log(field.inputType, 'Input type out of bound');
-        }
+    _.each(_this.elements, (field) => {
+        // switch (field.inputType) {
+        //     case 'text':
+        //     case 'password':
+        //     case 'number':
+        //         generatedTemplate += _this.buildInput(templates.input, fieldId, field);
+        //         break;
+        //     case 'select':
+        //         generatedTemplate += _this.buildSelect(templates.select, fieldId, field);
+        //         break;
+        //     default:
+        //         console.log(field.inputType, 'Input type out of bound');
+        // }
+
+        generatedTemplate += _this.buildInput(templates.input, field);
     });
 
     return _.template(templates.html)({
@@ -51,7 +52,8 @@ _this.buildTemplate = (templates, input) => {
 };
 
 _this.buildController = (template, input) => {
-    var payload = JSON.stringify(input.service.payload).replace(/"/g, '');
+    var result = _this.preparePayload(input.service.payload);
+    var payload = JSON.stringify(result).replace(/"/g, '');
     return _.template(template)({
         component: input.component,
         fileName: input.component.toLowerCase(),
@@ -60,11 +62,39 @@ _this.buildController = (template, input) => {
     });
 };
 
+_this.preparePayload = function (data) {
+    for (var key in data) {
+        var item = data[key];
+        if (typeof(item) === "string" || !(_.isObject(item)) ) {
+            data[key] = 'this.' + key;
+            _this.elements.push(key);
+        } else if (_.isObject(item) && !(item instanceof Date)) {
+            _this.preparePayload(item);
+        }
+    }
+    return data;
+};
+
+_this.buildControllerSpec = (template, input) => {
+    return _.template(template)({
+        component: input.component,
+        fileName: input.component.toLowerCase(),
+        models: _.keys(input.form)
+    });
+};
+
 _this.buildService = (template, input) => {
     return _.template(template)({
         component: input.component,
         fileName: input.component.toLowerCase(),
         url: input.service.url
+    });
+};
+
+_this.buildServiceSpec = (template, input) => {
+    return _.template(template)({
+        component: input.component,
+        fileName: input.component.toLowerCase()
     });
 };
 
