@@ -17,13 +17,6 @@ rimraf('output/*', () => {
 // Constructing compiled templates
 preloader.loadTemplates().then((templates) => {
   preloader.loadInput(process.argv[2]).then((input) => {
-    // write content to html file
-    fs.writeFile('./output/' + input.component.toLowerCase() + '.component.html',
-      mason.buildTemplate(templates, input),
-      'utf8', (err) => {
-        if (err) throw err;
-        console.log('HTML saved successfully');
-      });
 
     // write content to controller file
     fs.writeFile('./output/' + input.component.toLowerCase() + '.component.js',
@@ -33,6 +26,22 @@ preloader.loadTemplates().then((templates) => {
         console.log('Controller saved successfully');
       });
 
+    // write content to controller spec file
+    fs.writeFile('./output/' + input.component.toLowerCase() + '.component.spec.js',
+    mason.buildControllerSpec(templates.controllerspec, input),
+    'utf8', (err) => {
+      if (err) throw err;
+      console.log('Controller spec saved successfully');
+    });
+
+    // write content to html file
+    fs.writeFile('./output/' + input.component.toLowerCase() + '.component.html',
+      mason.buildTemplate(templates, input),
+      'utf8', (err) => {
+        if (err) throw err;
+        console.log('HTML saved successfully');
+      });
+
     // write content to service file
     fs.writeFile('./output/' + input.component.toLowerCase() + '.service.js',
       mason.buildService(templates.service, input),
@@ -40,6 +49,14 @@ preloader.loadTemplates().then((templates) => {
         if (err) throw err;
         console.log('Service saved successfully');
       });
+
+    // write content to service spec file
+    fs.writeFile('./output/' + input.component.toLowerCase() + '.service.spec.js',
+    mason.buildService(templates.servicespec, input),
+    'utf8', (err) => {
+      if (err) throw err;
+      console.log('Service spec saved successfully');
+    });
 
     // format the files with proper indentation using fformat module
     fformat('./output');

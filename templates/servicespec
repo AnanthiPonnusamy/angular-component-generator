@@ -1,0 +1,44 @@
+import { TestBed, inject } from '@angular/core/testing';
+import { HttpClient } from '@angular/common/http';
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from '@angular/common/http/testing';
+import { <%=component%>Service } from './<%=fileName%>.service';
+
+describe('<%=component%>Service', () => {
+  const httpClient = {
+    post: function() {
+      return {
+        subscribe: function(fn) {
+          fn();
+        }
+      };
+    }
+  };
+
+  const model = {
+    sample: 'sample'
+  };
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [<%=component%>Service,
+        {
+          provide: HttpClient,
+          useValue: httpClient
+        }
+      ]
+    });
+  });
+
+  it('should be created', inject([<%=component%>Service], (service: <%=component%>Service) => {
+    expect(service).toBeTruthy();
+  }));
+
+  it('should be submit function return data', inject([<%=component%>Service], (service: <%=component%>Service) => {
+    const data = service.submit(model);
+    expect(data).toBeDefined();
+  }));
+});

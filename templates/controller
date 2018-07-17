@@ -11,6 +11,7 @@ import { <%=component%>Service } from './<%=fileName%>.service';
 export class <%=component%>Component implements OnInit {
     <% _.each(models, function (model) { %>
     <%= model %>;<% }); %>
+    responseData;
 
     constructor(private service: <%=component%>Service) { }
 
@@ -19,8 +20,10 @@ export class <%=component%>Component implements OnInit {
     submit() {
         const payload = <%=payload%>;
         this.service.submit(payload).subscribe(response => {
+            this.responseData = response;
             console.log(response);
         }, err => {
+            this.responseData = err;
             console.log(err);
         });
     }

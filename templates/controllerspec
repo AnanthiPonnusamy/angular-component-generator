@@ -1,0 +1,61 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { <%=component%>Component } from './<%=fileName%>.component';
+import { <%=component%>Service } from './<%=fileName%>.service';
+
+describe('<%=component%>Component', () => {
+  let component: <%=component%>Component;
+  let fixture: ComponentFixture<<%=component%>Component>;
+  const responseData = 'success';
+  const errorData = 'error';
+
+  let service = {
+    submit: function() {
+      return {
+        subscribe: function(successFn, errorFn) {
+          successFn(responseData);
+        }
+      };
+    }
+  };
+
+  beforeEach(async(() => {
+    TestBed.overrideProvider(<%=component%>Service, {
+      useValue: service
+    });
+    TestBed.configureTestingModule({
+      declarations: [<%=component%>Component],
+      providers: [{ provide: <%=component%>Service, useValue: service }]
+    })
+      .overrideTemplate(<%=component%>Component, '')
+      .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(<%=component%>Component);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should test submit button hits services and get the success response', () => {
+    component.submit();
+    expect(component.responseData).toEqual(responseData);
+    service = {
+      submit: function() {
+        return {
+          subscribe: function(successFn, errorFn) {
+            errorFn(errorData);
+          }
+        };
+      }
+    };
+  });
+
+  it('should test submit button hits services and get the error response', () => {
+    component.submit();
+    expect(component.responseData).toEqual(errorData);
+  });
+});
